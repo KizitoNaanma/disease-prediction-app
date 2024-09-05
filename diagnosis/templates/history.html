@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    .prediction-history {
+        padding: 60px 0;
+        background-color: #f8f9fa; /* Light gray background for the section */
+    }
+
+    .prediction-history .container {
+        background-color: #ffffff; /* White background for the content area */
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        padding: 40px;
+    }
+
+    .prediction-history h2 {
+        color: var(--primary-color);
+        font-size: 2rem;
+        font-weight: bold;
+        margin-bottom: 30px;
+    }
+
+    .list-group-item {
+        border: none;
+        border-bottom: 1px solid #e9ecef;
+        padding: 15px;
+        font-size: 1rem;
+    }
+
+    .list-group-item:last-child {
+        border-bottom: none;
+    }
+</style>
+
+<div class="prediction-history">
+    <div class="container">
+        <h2 class="text-center">Prediction History</h2>
+        <ul class="list-group">
+            {% for prediction in predictions %}
+                <li class="list-group-item">
+                    <strong>Prediction:</strong> {{ prediction.prediction_result }}<br>
+                    <strong>Symptoms:</strong> {{ prediction.symptoms }}<br>
+                    <strong>Date:</strong> {{ prediction.date }}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+{% endblock %}

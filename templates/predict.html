@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Predict Disease</h2>
+<form method="post">
+    {% csrf_token %}
+    <div id="symptom-fields">
+        {{ form.symptom_1.label_tag }} {{ form.symptom_1 }}<br>
+        {{ form.symptom_2.label_tag }} {{ form.symptom_2 }}<br>
+        {{ form.symptom_3.label_tag }} {{ form.symptom_3 }}<br>
+        {{ form.symptom_4.label_tag }} {{ form.symptom_4 }}<br>
+    </div>
+    <button type="button" id="add-symptom">Add another symptom</button><br><br>
+    <button type="submit">Predict</button>
+</form>
+{% endblock %}

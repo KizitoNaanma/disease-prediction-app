@@ -1,0 +1,164 @@
+{% extends 'base.html' %}
+
+{% block title %}Welcome to Healthify{% endblock %}
+
+{% block content %}
+{% load static %}
+<style>
+    :root {
+        --primary-color: #ff6b6b; /* Primary color */
+        --accent-color: #009688; /* Teal for highlights */
+        --background-color: #FFFFFF; /* White background */
+        --text-color: #333333; /* Dark gray text */
+        --overlay-color: rgba(0, 0, 0, 0.5); /* Dark overlay color */
+    }
+
+    body {
+        background-color: var(--background-color);
+        color: var(--text-color);
+        font-family: 'Arial', sans-serif;
+    }
+
+    .hero-section {
+        position: relative;
+        background: url("{% static '/images/try.jpg' %}") no-repeat center center;
+        background-size: cover;
+        color: white;
+        padding: 150px 0;
+        text-align: center;
+        overflow: hidden;
+    }
+
+    .hero-section::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--overlay-color);
+        z-index: 1;
+    }
+
+    .hero-section .container {
+        position: relative;
+        z-index: 2;
+    }
+
+    .hero-title {
+        font-size: 3rem;
+        font-weight: bold;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+        transition: transform 0.3s ease, color 0.3s ease;
+    }
+
+    .hero-title:hover {
+        transform: translateY(-10px);
+        color: var(--accent-color);
+    }
+
+    .hero-subtitle {
+        font-size: 1.25rem;
+        margin: 20px 0;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+        transition: transform 0.3s ease, color 0.3s ease;
+    }
+
+    .hero-subtitle:hover {
+        transform: translateY(-5px);
+        color: var(--accent-color);
+    }
+
+    .btn-primary {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+        transition: background-color 0.3s, transform 0.3s;
+    }
+
+    .btn-primary:hover, .btn-primary:focus {
+        background-color: darken(var(--primary-color), 10%);
+        border-color: darken(var(--primary-color), 10%);
+    }
+
+    .btn-primary:active {
+        transform: scale(0.95);
+    }
+
+    .feature-icon {
+        color: var(--primary-color);
+        transition: transform 0.3s ease, color 0.3s ease;
+    }
+
+    .feature-icon:hover {
+        transform: scale(1.2);
+        color: var(--accent-color);
+    }
+
+    .section {
+        padding: 60px 0;
+    }
+
+    .highlight-text {
+        color: var(--primary-color);
+    }
+
+    .card {
+        border: none;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .card-body {
+        padding: 20px;
+    }
+</style>
+
+<div class="hero-section">
+    <div class="container">
+        <h1 class="hero-title">Empower Your Health with AI-Driven Insights</h1>
+        <p class="hero-subtitle">Discover personalized health predictions and take charge of your well-being today.</p>
+        {% if user.is_authenticated %}
+            <a href="{% url 'predict_disease' %}" class="btn btn-lg btn-primary">Get Started</a>
+        {% else %}
+        <a href="{% url 'signup' %}" class="btn btn-lg btn-primary">Get Started</a>
+
+        {% endif %}
+
+    </div>
+</div>
+
+<div class="container section">
+    <div class="row text-center">
+        <div class="col-md-4">
+            <i class="fas fa-diagnoses fa-3x feature-icon"></i>
+            <h3 class="mt-3">AI-Powered Diagnosis</h3>
+            <p>Our advanced AI models provide accurate and personalized health predictions based on your symptoms.</p>
+        </div>
+        <div class="col-md-4">
+            <i class="fas fa-history fa-3x feature-icon"></i>
+            <h3 class="mt-3">Track Your History</h3>
+            <p>View your past predictions and keep track of your health journey with ease.</p>
+        </div>
+        <div class="col-md-4">
+            <i class="fas fa-user-shield fa-3x feature-icon"></i>
+            <h3 class="mt-3">Privacy & Security</h3>
+            <p>Your data is safe with us. We prioritize your privacy and ensure that your information is secure.</p>
+        </div>
+    </div>
+</div>
+
+<div class="container section">
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <h2 class="font-weight-bold highlight-text">Why Choose Healthify?</h2>
+            <p>At Healthify, we believe in empowering individuals to take control of their health through AI-driven insights. Our platform is designed to provide you with the tools and information you need to make informed decisions about your well-being.</p>
+            <ul class="list-unstyled">
+                <li><i class="fas fa-check-circle highlight-text"></i> Accurate predictions based on the latest medical research.</li>
+                <li><i class="fas fa-check-circle highlight-text"></i> Easy-to-use interface with a focus on user experience.</li>
+                <li><i class="fas fa-check-circle highlight-text"></i> Comprehensive history tracking for better health management.</li>
+            </ul>
+            {% comment %} <a href="{% url 'signup' %}" class="btn btn-lg btn-outline-primary mt-4">Join Us Today</a> {% endcomment %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
